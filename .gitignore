@@ -8,3 +8,5 @@
 /httpRequests/
 
 /src/test/
+
+application.properties
