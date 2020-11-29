@@ -1,6 +1,9 @@
 package com.tracker.feeding.models;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 import javax.persistence.*;
+import java.util.Date;
 
 @Entity
 @Table(name = "users")
@@ -22,16 +25,26 @@ public class User {
     @Column(nullable = false, length = 50)
     private String last_name;
 
+    @DateTimeFormat
+    @Temporal(TemporalType.DATE)
+    @Column(nullable = false)
+    private Date signup_date;
+
+    @Column(nullable = false, length = 75)
+    private String url;
+
     @Column(nullable = false, length = 50)
     private String password;
 
-    public User(long id, String username, String email, String first_name, String last_name, String password) {
+    public User(long id, String username, String email, String first_name, String last_name, String password, Date signup_date, String url) {
         this.id = id;
         this.username = username;
         this.email = email;
         this.first_name = first_name;
         this.last_name = last_name;
         this.password = password;
+        this.signup_date = signup_date;
+        this.url = url;
     }
 
     public User () {
@@ -76,6 +89,22 @@ public class User {
 
     public void setLast_name(String last_name) {
         this.last_name = last_name;
+    }
+
+    public Date getSignup_date() {
+        return signup_date;
+    }
+
+    public void setSignup_date(Date signup_date) {
+        this.signup_date = signup_date;
+    }
+
+    public String getUrl() {
+        return url;
+    }
+
+    public void setUrl(String url) {
+        this.url = url;
     }
 
     public String getPassword() {
