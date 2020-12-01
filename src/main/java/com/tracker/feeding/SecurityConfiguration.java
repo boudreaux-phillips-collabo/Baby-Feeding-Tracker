@@ -20,7 +20,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     public PasswordEncoder passwordEncoder() { return new BCryptPasswordEncoder(); }
 
     @Override
-    protected void configure(Authentication auth) throws Exception {
+    protected void configure(AuthenticationManagerBuilder auth) throws Exception {
         auth
                 .userDetailsService(usersLoader)
                 .passwordEncoder(passwordEncoder())
