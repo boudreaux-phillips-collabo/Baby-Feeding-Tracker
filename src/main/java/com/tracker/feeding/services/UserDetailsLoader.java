@@ -2,22 +2,26 @@ package com.tracker.feeding.services;
 
 import com.tracker.feeding.models.Role;
 import com.tracker.feeding.models.User;
+import com.tracker.feeding.repositories.UserRepository;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 import java.util.Set;
 
+@Service
 public class UserDetailsLoader implements UserDetailsService {
     private User user;
+    private final UserRepository userDao;
 
-    public UserDetailsLoader(User user) {
-        this.user = user;
-    }
+    public UserDetailsLoader(UserRepository userDao) { this.userDao = userDao; }
+
+    public UserDetailsLoader(User user) { this.user = user; }
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
