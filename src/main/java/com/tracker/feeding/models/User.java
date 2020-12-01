@@ -1,15 +1,20 @@
 package com.tracker.feeding.models;
 
+import org.hibernate.annotations.Fetch;
 import org.springframework.format.annotation.DateTimeFormat;
 
+import javax.management.relation.Role;
 import javax.persistence.*;
 import java.util.Date;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 @Table(name = "users")
 public class User {
 
     @Id
+    @Column(name = "user_id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
@@ -36,6 +41,8 @@ public class User {
     @Column(nullable = false, length = 50)
     private String password;
 
+    private boolean enabled;
+
     public User(long id, String username, String email, String first_name, String last_name, String password, Date signup_date, String url) {
         this.id = id;
         this.username = username;
@@ -50,6 +57,14 @@ public class User {
     public User () {
 
     }
+
+    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @JoinTable(
+            name = "users_roles",
+            joinColumns = @JoinColumn(name = "user_id"),
+            inverseJoinColumns = @JoinColumn(name = "role_id")
+    )
+    private Set<Role> roles = new HashSet<>();
 
     public long getId() {
         return id;
