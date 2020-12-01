@@ -1,6 +1,5 @@
 package com.tracker.feeding.models;
 
-import org.hibernate.annotations.Fetch;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.management.relation.Role;
@@ -43,7 +42,7 @@ public class User {
 
     private boolean enabled;
 
-    public User(long id, String username, String email, String first_name, String last_name, String password, Date signup_date, String url) {
+    public User(long id, String username, String email, String first_name, String last_name, String password, Date signup_date, String url, boolean enabled) {
         this.id = id;
         this.username = username;
         this.email = email;
@@ -52,6 +51,7 @@ public class User {
         this.password = password;
         this.signup_date = signup_date;
         this.url = url;
+        this.enabled = enabled;
     }
 
     public User () {
@@ -128,5 +128,13 @@ public class User {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public boolean isEnabled() {
+        return enabled;
+    }
+
+    public void setEnabled(boolean enabled) {
+        this.enabled = enabled;
     }
 }
