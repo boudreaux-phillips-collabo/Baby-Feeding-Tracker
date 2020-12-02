@@ -2,6 +2,7 @@ package com.tracker.feeding.controllers;
 
 import com.tracker.feeding.models.User;
 import com.tracker.feeding.repositories.UserRepository;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -22,6 +23,7 @@ public class UserController {
 
     @GetMapping("/user/profile")
     public String userProfile(Model model) {
+        User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         model.addAttribute("user", userDao.getOne(user.getId()));
         return "/users/profile";
     }
