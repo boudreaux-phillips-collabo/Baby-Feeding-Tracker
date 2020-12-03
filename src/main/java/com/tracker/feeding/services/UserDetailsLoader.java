@@ -19,7 +19,7 @@ import java.util.Set;
 @Service
 public class UserDetailsLoader implements UserDetails {
     private User user;
-    private final UserRepository userDao;
+    private UserRepository userDao;
 
     public UserDetailsLoader(UserRepository userDao) { this.userDao = userDao; }
 
