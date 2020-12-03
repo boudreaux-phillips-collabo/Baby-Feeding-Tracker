@@ -44,7 +44,7 @@ public class SetupDataLoader implements ApplicationListener<ContextRefreshedEven
         createRoleIfNotFound("ROLE_ADMIN", adminPrivileges);
         createRoleIfNotFound("ROLE_USER", Arrays.asList(readPrivilege));
 
-        Role adminRole =- roleDao.findByName("ROLE_ADMIN");
+        Role adminRole = roleDao.findByName("ROLE_ADMIN");
         User user = new User();
         user.setFirst_name("admin");
         user.setLast_name("admin");
