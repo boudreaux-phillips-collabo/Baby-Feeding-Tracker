@@ -31,7 +31,7 @@ public class AuthenticationController {
     @GetMapping("/register")
     public String registerForm(Model model) {
         model.addAttribute("user", new User());
-        return "register";
+        return "users/register";
     }
 
     @PostMapping("/register")
@@ -42,7 +42,7 @@ public class AuthenticationController {
         user.setUrl(user.getUrl());
         LocalDate date = LocalDate.now();
         java.util.Date dateVal = java.sql.Date.valueOf(date);
-        user.setSignupDate(dateVal);
+        user.setSignup_date(dateVal);
 
         return "redirect:/profile";
     }
