@@ -4,6 +4,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.management.relation.Role;
 import javax.persistence.*;
+import java.util.Collection;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
@@ -13,9 +14,8 @@ import java.util.Set;
 public class User {
 
     @Id
-    @Column(name = "user_id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
+    private Long id;
 
     @Column(nullable = false, length = 25)
     private String username;
@@ -41,8 +41,9 @@ public class User {
     private String password;
 
     private boolean enabled;
+    private boolean tokenExpired;
 
-    public User(long id, String username, String email, String first_name, String last_name, String password, Date signup_date, String url, boolean enabled) {
+    public User(long id, String username, String email, String first_name, String last_name, String password, Date signup_date, String url, boolean enabled, boolean tokenExpired) {
         this.id = id;
         this.username = username;
         this.email = email;
@@ -52,19 +53,20 @@ public class User {
         this.signup_date = signup_date;
         this.url = url;
         this.enabled = enabled;
+        this.tokenExpired = tokenExpired;
     }
 
     public User () {
 
     }
 
-    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @ManyToMany
     @JoinTable(
             name = "users_roles",
-            joinColumns = @JoinColumn(name = "user_id"),
-            inverseJoinColumns = @JoinColumn(name = "role_id")
+            joinColumns = @JoinColumn(name = "user_id", referencedColumnName = "id"),
+            inverseJoinColumns = @JoinColumn(name = "role_id", referencedColumnName = "id")
     )
-    private Set<Role> roles = new HashSet<>();
+    private Collection<Role> roles;
 
     public long getId() {
         return id;
@@ -136,5 +138,13 @@ public class User {
 
     public void setEnabled(boolean enabled) {
         this.enabled = enabled;
+    }
+
+    public boolean isTokenExpired() {
+        return tokenExpired;
+    }
+
+    public void setTokenExpired(boolean tokenExpired) {
+        this.tokenExpired = tokenExpired;
     }
 }
