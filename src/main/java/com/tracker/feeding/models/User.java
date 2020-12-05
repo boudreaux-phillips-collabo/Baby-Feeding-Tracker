@@ -14,7 +14,8 @@ import java.util.Set;
 public class User {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(nullable = false, unique = true)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
     @Column(nullable = false, length = 25)
@@ -24,15 +25,15 @@ public class User {
     private String email;
 
     @Column(nullable = false, length = 50)
-    private String first_name;
+    private String firstName;
 
     @Column(nullable = false, length = 50)
-    private String last_name;
+    private String lastName;
 
     @DateTimeFormat
     @Temporal(TemporalType.DATE)
     @Column(nullable = false)
-    private Date signup_date;
+    private Date signupDate;
 
     @Column(nullable = false, length = 75)
     private String url;
@@ -41,38 +42,37 @@ public class User {
     private String password;
 
     private boolean enabled;
-    private boolean tokenExpired;
 
-    public User(long id, String username, String email, String first_name, String last_name, String password, Date signup_date, String url, boolean enabled, boolean tokenExpired) {
-        this.id = id;
-        this.username = username;
-        this.email = email;
-        this.first_name = first_name;
-        this.last_name = last_name;
-        this.password = password;
-        this.signup_date = signup_date;
-        this.url = url;
-        this.enabled = enabled;
-        this.tokenExpired = tokenExpired;
-    }
+    private String secret;
 
-    public User () {
-
-    }
-
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(
-            name = "users_roles",
-            joinColumns = @JoinColumn(name = "user_id", referencedColumnName = "id"),
-            inverseJoinColumns = @JoinColumn(name = "role_id", referencedColumnName = "id")
-    )
+            name = "users_roles", joinColumns = @JoinColumn(name = "user_id", referencedColumnName = "id"), inverseJoinColumns = @JoinColumn(name = "role_id", referencedColumnName = "id"))
     private Collection<Role> roles;
 
-    public long getId() {
+    public User() {
+        super();
+        this.enabled = false;
+    }
+
+//    public User(long id, String username, String email, String firstName, String lastName, String password, Date signupDate, String url, boolean enabled, boolean tokenExpired) {
+//        this.id = id;
+//        this.username = username;
+//        this.email = email;
+//        this.firstName = firstName;
+//        this.lastName = lastName;
+//        this.password = password;
+//        this.signupDate = signupDate;
+//        this.url = url;
+//        this.enabled = enabled;
+//    }
+
+
+    public Long getId() {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(final Long id) {
         this.id = id;
     }
 
@@ -80,7 +80,7 @@ public class User {
         return username;
     }
 
-    public void setUsername(String username) {
+    public void setUsername(final String username) {
         this.username = username;
     }
 
@@ -88,39 +88,39 @@ public class User {
         return email;
     }
 
-    public void setEmail(String email) {
+    public void setEmail(final String email) {
         this.email = email;
     }
 
-    public String getFirst_name() {
-        return first_name;
+    public String getFirstName() {
+        return firstName;
     }
 
-    public void setFirst_name(String first_name) {
-        this.first_name = first_name;
+    public void setFirst_name(final String firstName) {
+        this.firstName = firstName;
     }
 
-    public String getLast_name() {
-        return last_name;
+    public String getLastName() {
+        return lastName;
     }
 
-    public void setLast_name(String last_name) {
-        this.last_name = last_name;
+    public void setLast_name(final String lastName) {
+        this.lastName = lastName;
     }
 
-    public Date getSignup_date() {
-        return signup_date;
+    public Date getSignupDate() {
+        return signupDate;
     }
 
-    public void setSignup_date(Date signup_date) {
-        this.signup_date = signup_date;
+    public void setSignupDate(final Date signupDate) {
+        this.signupDate = signupDate;
     }
 
     public String getUrl() {
         return url;
     }
 
-    public void setUrl(String url) {
+    public void setUrl(final String url) {
         this.url = url;
     }
 
@@ -128,23 +128,75 @@ public class User {
         return password;
     }
 
-    public void setPassword(String password) {
+    public void setPassword(final String password) {
         this.password = password;
+    }
+
+    public Collection<Role> getRoles() {
+        return roles;
+    }
+
+    public void setRoles(Collection<Role> roles) {
+        this.roles = roles;
     }
 
     public boolean isEnabled() {
         return enabled;
     }
 
-    public void setEnabled(boolean enabled) {
+    public void setEnabled(final boolean enabled) {
         this.enabled = enabled;
     }
 
-    public boolean isTokenExpired() {
-        return tokenExpired;
+    public String getSecret() {
+        return secret;
     }
 
-    public void setTokenExpired(boolean tokenExpired) {
-        this.tokenExpired = tokenExpired;
+    public void setSecret(String secret) {
+        this.secret = secret;
     }
+
+    @Override
+    public int hashCode() {
+        final int prime = 31;
+        int result = 1;
+        result = (prime * result) + ((getEmail() == null) ? 0 : getEmail().hashCode());
+        return result;
+    }
+
+    @Override
+    public boolean equals(final Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final User user = (User) obj;
+        if (!getEmail().equals(user.getEmail())) {
+            return false;
+        }
+        return true;
+    }
+
+    @Override
+    public String toString() {
+        final StringBuilder builder = new StringBuilder();
+        builder.append("User [id=")
+                .append(id)
+                .append(", firstName=").append(firstName)
+                .append(", lastName=").append(lastName)
+                .append(", email=").append(email)
+                .append(", enabled=").append(enabled)
+                //.append(", isUsing2FA=").append(isUsing2FA)
+                .append(", secret=").append(secret)
+                .append(", roles=").append(roles)
+                .append("]");
+        return builder.toString();
+    }
+
+
 }
