@@ -1,35 +1,30 @@
 package com.tracker.feeding.controllers;
 
-import com.tracker.feeding.models.User;
-import com.tracker.feeding.repositories.UserRepository;
-import org.springframework.security.crypto.password.PasswordEncoder;
+import com.tracker.feeding.security.ActiveUserStore;
+import com.tracker.feeding.services.IUserService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
 
 @Controller
 public class UserController {
-    private final UserRepository userDao;
-    private final PasswordEncoder passwordEncoder;
 
-    public UserController(UserRepository userDao, PasswordEncoder passwordEncoder) {
-        this.userDao = userDao;
-        this.passwordEncoder = passwordEncoder;
+    @Autowired
+    ActiveUserStore activeUserStore;
+
+    @Autowired
+    IUserService userService;
+
+    @GetMapping("/loggedUsers")
+    public String getLoggedUsers(final Model model) {
+        model.addAttribute("users", activeUserStore.getUsers());
+        return "users";
     }
 
-    @GetMapping("/register")
-    public String registerForm(Model model) {
-        model.addAttribute("user", new User());
-        return "users/register";
-    }
-
-    @PostMapping("/register")
-    public String saveUser(@ModelAttribute User user) {
-        String hash = passwordEncoder.encode((user.getPassword()));
-        user.setPassword(hash);
-        userDao.save(user);
-        return "redirect:/profile";
+    @GetMapping("/loggedUsersFromSessionRegistry")
+    public String getLoggedUsersFromSessionRegistry(final Model model) {
+        model.addAttribute("users", userService.getUsersFromSessionRegistry());
+        return "users";
     }
 }
