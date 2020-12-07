@@ -2,7 +2,6 @@ package com.tracker.feeding.services;
 
 import com.tracker.feeding.models.Role;
 import com.tracker.feeding.models.User;
-import com.tracker.feeding.models.UserWithRoles;
 import com.tracker.feeding.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
@@ -12,7 +11,6 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
-import javax.transaction.Transactional;
 import java.util.*;
 
 @Service

@@ -111,5 +111,4 @@ public class NewLocationToken {
     public String toString() {
         return "NewLocationToken [id=" + id + ", token=" + token + ", userLocation=" + userLocation + "]";
     }
-
 }
