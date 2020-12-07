@@ -43,6 +43,8 @@ public class User {
 
     private boolean enabled;
 
+    private boolean isUsing2FA;
+
     private String secret;
 
     @ManyToMany(fetch = FetchType.EAGER)
@@ -52,6 +54,7 @@ public class User {
 
     public User() {
         super();
+        this.isUsing2FA = isUsing2FA;
         this.enabled = false;
     }
 
@@ -148,6 +151,14 @@ public class User {
         this.enabled = enabled;
     }
 
+    public boolean getUsing2FA() {
+        return isUsing2FA;
+    }
+
+    public void isUsing2FA(boolean isUsing2FA) {
+        this.isUsing2FA = isUsing2FA;
+    }
+
     public String getSecret() {
         return secret;
     }
@@ -191,7 +202,7 @@ public class User {
                 .append(", lastName=").append(lastName)
                 .append(", email=").append(email)
                 .append(", enabled=").append(enabled)
-                //.append(", isUsing2FA=").append(isUsing2FA)
+                .append(", isUsing2FA=").append(isUsing2FA)
                 .append(", secret=").append(secret)
                 .append(", roles=").append(roles)
                 .append("]");
