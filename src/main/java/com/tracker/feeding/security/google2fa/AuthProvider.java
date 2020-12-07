@@ -40,10 +40,10 @@ public class AuthProvider extends DaoAuthenticationProvider {
         } catch (final NumberFormatException e) {
             return false;
         }
+    }
 
-        @Override
-        public boolean supports(Class<?> authentication) {
-            return authentication.equals(UsernamePasswordAuthenticationToken.class);
-        }
+    @Override
+    public boolean supports(Class<?> authentication) {
+        return authentication.equals(UsernamePasswordAuthenticationToken.class);
     }
 }
