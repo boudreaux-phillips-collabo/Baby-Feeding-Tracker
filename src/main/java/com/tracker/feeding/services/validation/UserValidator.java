@@ -10,7 +10,7 @@ public class UserValidator implements Validator {
 
     @Override
     public boolean support(final Class<?> supportClass) {
-        return UserDto.class.isAssiableFrom(supportClass);
+        return UserDto.class.isAssignableFrom(supportClass);
     }
 
     @Override

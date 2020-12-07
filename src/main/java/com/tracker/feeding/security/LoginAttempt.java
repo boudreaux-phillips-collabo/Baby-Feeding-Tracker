@@ -24,26 +24,26 @@ public class LoginAttempt {
                 return 0;
             }
         });
+    }
 
-        public void loginSuccess(final String key) {
-            attemptsCache.invalidate(key);
+    public void loginSuccess(final String key) {
+        attemptsCache.invalidate(key);
+    }
+
+    public void loginFailed(final String key) {
+        int attempts = 0;
+        try {
+        attempts = attemptsCache.get(key);
+        } catch (final ExecutionException e) {
+        attempts = 0;
         }
+    }
 
-        public void loginFailed(final String key) {
-            int attempts = 0;
-            try {
-            attempts = attemptsCache.get(key);
-            } catch (final ExecutionException e) {
-            attempts = 0;
-            }
-        }
-
-        public boolean isBlocked(final String key) {
-            try {
-                return attemptsCache.get(key) >= MAX_ATTEMPT;
-            } catch (final ExecutionException e) {
-                return false;
-            }
+    public boolean isBlocked(final String key) {
+        try {
+            return attemptsCache.get(key) >= MAX_ATTEMPT;
+        } catch (final ExecutionException e) {
+            return false;
         }
     }
 }
