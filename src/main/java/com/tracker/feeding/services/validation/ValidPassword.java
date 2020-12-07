@@ -19,7 +19,7 @@ public @interface ValidPassword {
 
     String message() default "Password invalid. Please try again.";
 
-    Class<?>[] groups() default;
+    Class<?>[] groups() default {};
 
     Class<? extends Payload>[] payload() default {};
 
