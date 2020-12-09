@@ -9,6 +9,8 @@ import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Component;
 
+import java.util.Date;
+
 @Component
 public class DifferentLocationLoginListener implements ApplicationListener<DifferentLocationLoginHandler> {
 
@@ -21,7 +23,7 @@ public class DifferentLocationLoginListener implements ApplicationListener<Diffe
     @Autowired
     private Environment env;
 
-    public void onApplicationEvent(final DifferentLocationLoginListener event) {
+    public void onApplicationEvent(final DifferentLocationLoginHandler event) {
         final String enableLocUri = event.getAppUrl() + "/user/enabledNewLoc?token=" + event.getToken().getToken();
         final String changePassUri = event.getAppUrl() + "/changePassword.html";
         final String recipientAddress = event.getUsername();

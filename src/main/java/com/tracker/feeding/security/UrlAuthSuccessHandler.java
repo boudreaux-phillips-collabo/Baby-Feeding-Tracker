@@ -20,8 +20,8 @@ import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.util.Collection;
 
-@Component("myAuthenticationSuccessHandler")
-public class MySimpleUrlAuthenticationSuccessHandler implements AuthenticationSuccessHandler {
+@Component("UrlAuthSuccessHandler")
+public class UrlAuthSuccessHandler implements AuthenticationSuccessHandler {
     private final Logger logger = LoggerFactory.getLogger(getClass());
 
     private RedirectStrategy redirectStrategy = new DefaultRedirectStrategy();

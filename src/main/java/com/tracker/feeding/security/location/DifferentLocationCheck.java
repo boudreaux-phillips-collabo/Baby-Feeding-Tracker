@@ -29,7 +29,7 @@ public class DifferentLocationCheck implements UserDetailsChecker {
         final NewLocationToken token = userService.isNewLoginLocation(userDetails.getUsername(), ip);
         if (token != null) {
             final String appUrl = "http://" + request.getServerName() + ":" + request.getServerPort() + request.getContextPath();
-            eventPublisher.publishEvent(new DifferentLocationLoginEvent(request.getLocale(), userDetails.getUsername(), ip, token, appURL));
+            eventPublisher.publishEvent(new DifferentLocationLoginHandler(request.getLocale(), userDetails.getUsername(), ip, token, appURL));
             throw new UnusualLocationException("Unusual location.");
         }
     }

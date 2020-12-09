@@ -6,36 +6,33 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.OneToOne;
+import javax.persistence.ManyToOne;
 
 @Entity
-public class NewLocationToken {
+public class UserLocation {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    private String token;
+    private String country;
 
-    @OneToOne(targetEntity = UserLocation.class, fetch = FetchType.EAGER)
-    @JoinColumn(nullable = false, name = "user_location_id")
-    private UserLocation userLocation;
+    private boolean enabled;
 
-    public NewLocationToken() {
+    @ManyToOne(targetEntity = User.class, fetch = FetchType.EAGER)
+    @JoinColumn(nullable = false, name = "user_id")
+    private User user;
+
+    public UserLocation() {
         super();
+        enabled = false;
     }
 
-    public NewLocationToken(final String token) {
+    public UserLocation(String country, User user) {
         super();
-        this.token = token;
+        this.country = country;
+        this.user = user;
+        enabled = false;
     }
-
-    public NewLocationToken(final String token, final UserLocation userLocation) {
-        super();
-        this.token = token;
-        this.userLocation = userLocation;
-    }
-
-    //
 
     public Long getId() {
         return id;
@@ -45,29 +42,38 @@ public class NewLocationToken {
         this.id = id;
     }
 
-    public String getToken() {
-        return token;
+    public String getCountry() {
+        return country;
     }
 
-    public void setToken(String token) {
-        this.token = token;
+    public void setCountry(String country) {
+        this.country = country;
     }
 
-    public UserLocation getUserLocation() {
-        return userLocation;
+    public User getUser() {
+        return user;
     }
 
-    public void setUserLocation(UserLocation userLocation) {
-        this.userLocation = userLocation;
+    public void setUser(User user) {
+        this.user = user;
+    }
+
+    public boolean isEnabled() {
+        return enabled;
+    }
+
+    public void setEnabled(boolean enabled) {
+        this.enabled = enabled;
     }
 
     @Override
     public int hashCode() {
         final int prime = 31;
         int result = 1;
+        result = (prime * result) + ((getCountry() == null) ? 0 : getCountry().hashCode());
+        result = (prime * result) + (isEnabled() ? 1231 : 1237);
         result = (prime * result) + ((getId() == null) ? 0 : getId().hashCode());
-        result = (prime * result) + ((getToken() == null) ? 0 : getToken().hashCode());
-        result = (prime * result) + ((getUserLocation() == null) ? 0 : getUserLocation().hashCode());
+        result = (prime * result) + ((getUser() == null) ? 0 : getUser().hashCode());
         return result;
     }
 
@@ -82,7 +88,17 @@ public class NewLocationToken {
         if (getClass() != obj.getClass()) {
             return false;
         }
-        final NewLocationToken other = (NewLocationToken) obj;
+        final UserLocation other = (UserLocation) obj;
+        if (getCountry() == null) {
+            if (other.getCountry() != null) {
+                return false;
+            }
+        } else if (!getCountry().equals(other.getCountry())) {
+            return false;
+        }
+        if (isEnabled() != other.isEnabled()) {
+            return false;
+        }
         if (getId() == null) {
             if (other.getId() != null) {
                 return false;
@@ -90,18 +106,11 @@ public class NewLocationToken {
         } else if (!getId().equals(other.getId())) {
             return false;
         }
-        if (getToken() == null) {
-            if (other.getToken() != null) {
+        if (getUser() == null) {
+            if (other.getUser() != null) {
                 return false;
             }
-        } else if (!getToken().equals(other.getToken())) {
-            return false;
-        }
-        if (getUserLocation() == null) {
-            if (other.getUserLocation() != null) {
-                return false;
-            }
-        } else if (!getUserLocation().equals(other.getUserLocation())) {
+        } else if (!getUser().equals(other.getUser())) {
             return false;
         }
         return true;
@@ -109,6 +118,6 @@ public class NewLocationToken {
 
     @Override
     public String toString() {
-        return "NewLocationToken [id=" + id + ", token=" + token + ", userLocation=" + userLocation + "]";
+        return "UserLocation [id=" + id + ", country=" + country + ", enabled=" + enabled + ", user=" + user + "]";
     }
 }

@@ -40,7 +40,7 @@ import java.util.stream.Collectors;
 @Controller
 public class RegistrationController {
 
-    private final Logger LOGGER = LoggerFactor.getLogger(getClass());
+    private final Logger LOGGER = LoggerFactory.getLogger(getClass());
 
     @Autowired
     private IUserService userService;

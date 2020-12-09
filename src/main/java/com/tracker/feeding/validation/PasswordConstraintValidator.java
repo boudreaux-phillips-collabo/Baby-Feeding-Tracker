@@ -1,24 +1,14 @@
-package com.tracker.feeding.services.validation;
+package com.tracker.feeding.validation;
 
 import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;
 import java.util.Arrays;
 
-import org.passay.AlphabeticalSequenceRule;
-import org.passay.DigitCharacterRule;
-import org.passay.LengthRule;
-import org.passay.NumericalSequenceRule;
-import org.passay.PasswordData;
-import org.passay.PasswordValidator;
-import org.passay.QwertySequenceRule;
-import org.passay.RuleResult;
-import org.passay.SpecialCharacterRule;
-import org.passay.UppercaseCharacterRule;
-import org.passay.WhitespaceRule;
+import org.passay.*;
 
 import com.google.common.base.Joiner;
 
-public class PasswordValidator implements ConstraintValidator<ValidPassword, String> {
+public class PasswordConstraintValidator implements ConstraintValidator<ValidPassword, String> {
 
     @Override
     public void initialize(final ValidPassword arg0) {}
@@ -30,9 +20,9 @@ public class PasswordValidator implements ConstraintValidator<ValidPassword, Str
                 new UppercaseCharacterRule(2),
                 new DigitCharacterRule(2),
                 new SpecialCharacterRule(2),
-                new NumericalSequence(3, false),
-                new AlphabeticalSequence(3, false),
-                new QwertySequence(3, false),
+                new NumericalSequenceRule(3, false),
+                new AlphabeticalSequenceRule(3, false),
+                new QwertySequenceRule(3, false),
                 new WhitespaceRule()
         ));
         final RuleResult result = validator.validate(new PasswordData(password));
