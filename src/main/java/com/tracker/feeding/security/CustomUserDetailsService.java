@@ -32,7 +32,7 @@ public class CustomUserDetailsService implements UserDetailsService {
     @Autowired
     private HttpServletRequest request;
 
-    public MyUserDetailsService() {
+    public CustomUserDetailsService() {
         super();
     }
 
