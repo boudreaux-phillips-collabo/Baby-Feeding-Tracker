@@ -62,10 +62,6 @@ public class RegistrationController {
         final String result = userService.validateVerificationToken(token);
         if (result.equals("valid")) {
             final User user = userService.getUser(token);
-             if (user.isUsing2FA()) {
-             model.addAttribute("qr", userService.generateQRUrl(user));
-             return "redirect:/qrcode.html?lang=" + locale.getLanguage();
-             }
             authWithoutPassword(user);
             model.addAttribute("messageKey", "message.accountVerified");
             return new ModelAndView("redirect:/console", model);

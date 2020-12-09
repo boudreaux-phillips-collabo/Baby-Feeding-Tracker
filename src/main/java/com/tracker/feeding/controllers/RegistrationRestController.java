@@ -160,6 +160,3 @@ public class RegistrationRestController {
         return xfHeader.split(",")[0];
     }
 }
-
-public class RegistrationRestController {
-}
