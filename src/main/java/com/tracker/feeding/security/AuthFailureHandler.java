@@ -33,16 +33,21 @@ public class AuthFailureHandler extends SimpleUrlAuthenticationFailureHandler {
 
         String errorMessage = messages.getMessage("message.badCredentials", null, locale);
 
-        if (exception.getMessage().equalsIgnoreCase("User account disabled.")) {
+        if (exception.getMessage()
+                .equalsIgnoreCase("User is disabled")) {
             errorMessage = messages.getMessage("auth.message.disabled", null, locale);
-        } else if (exception.getMessage().equalsIgnoreCase("User account expired.")) {
+        } else if (exception.getMessage()
+                .equalsIgnoreCase("User account has expired")) {
             errorMessage = messages.getMessage("auth.message.expired", null, locale);
-        } else if (exception.getMessage().equalsIgnoreCase("User blocked.")) {
+        } else if (exception.getMessage()
+                .equalsIgnoreCase("blocked")) {
             errorMessage = messages.getMessage("auth.message.blocked", null, locale);
-        } else if (exception.getMessage().equalsIgnoreCase("Unusual login location.")) {
+        } else if (exception.getMessage()
+                .equalsIgnoreCase("unusual location")) {
             errorMessage = messages.getMessage("auth.message.unusual.location", null, locale);
         }
 
-        request.getSession().setAttribute(WebAttributes.AUTHENTICATION_EXCEPTION, errorMessage);
+        request.getSession()
+                .setAttribute(WebAttributes.AUTHENTICATION_EXCEPTION, errorMessage);
     }
 }

@@ -1,4 +1,4 @@
-package com.tracker.feeding.services.validation;
+package com.tracker.feeding.validation;
 
 import com.tracker.feeding.dto.UserDto;
 

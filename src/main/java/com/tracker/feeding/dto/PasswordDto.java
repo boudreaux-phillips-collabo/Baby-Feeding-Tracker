@@ -1,6 +1,6 @@
 package com.tracker.feeding.dto;
 
-import com.tracker.feeding.services.validation.ValidPassword;
+import com.tracker.feeding.validation.ValidPassword;
 
 public class PasswordDto {
 

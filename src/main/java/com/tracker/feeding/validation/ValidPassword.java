@@ -1,4 +1,4 @@
-package com.tracker.feeding.services.validation;
+package com.tracker.feeding.validation;
 
 import javax.validation.Constraint;
 import javax.validation.Payload;

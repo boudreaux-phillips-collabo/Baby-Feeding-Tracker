@@ -21,13 +21,13 @@ import org.springframework.transaction.annotation.Transactional;
 
 @Service("userDetailsService")
 @Transactional
-public class MyUserDetailsService implements UserDetailsService {
+public class CustomUserDetailsService implements UserDetailsService {
 
     @Autowired
     private UserRepository userDao;
 
     @Autowired
-    private LoginAttemptService loginAttemptService;
+    private LoginAttempt loginAttempt;
 
     @Autowired
     private HttpServletRequest request;
@@ -41,7 +41,7 @@ public class MyUserDetailsService implements UserDetailsService {
     @Override
     public UserDetails loadUserByUsername(final String email) throws UsernameNotFoundException {
         final String ip = getClientIP();
-        if (loginAttemptService.isBlocked(ip)) {
+        if (loginAttempt.isBlocked(ip)) {
             throw new RuntimeException("blocked");
         }
 

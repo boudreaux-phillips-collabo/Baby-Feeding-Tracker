@@ -1,4 +1,4 @@
-package com.tracker.feeding.services.validation;
+package com.tracker.feeding.validation;
 
 @SuppressWarnings("serial")
 public class EmailException extends Throwable {

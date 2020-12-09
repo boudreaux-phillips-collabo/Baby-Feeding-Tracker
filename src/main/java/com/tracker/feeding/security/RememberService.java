@@ -21,7 +21,7 @@ import org.springframework.security.web.authentication.rememberme.PersistentReme
 import org.springframework.security.web.authentication.rememberme.PersistentTokenBasedRememberMeServices;
 import org.springframework.security.web.authentication.rememberme.PersistentTokenRepository;
 
-public class CustomRememberMeServices extends PersistentTokenBasedRememberMeServices {
+public class RememberService extends PersistentTokenBasedRememberMeServices {
 
     @Autowired
     private UserRepository userRepository;
@@ -31,7 +31,7 @@ public class CustomRememberMeServices extends PersistentTokenBasedRememberMeServ
     private PersistentTokenRepository tokenRepository;
     private String key;
 
-    public CustomRememberMeServices(String key, UserDetailsService userDetailsService, PersistentTokenRepository tokenRepository) {
+    public RememberService(String key, UserDetailsService userDetailsService, PersistentTokenRepository tokenRepository) {
         super(key, userDetailsService, tokenRepository);
         this.tokenRepository = tokenRepository;
         this.key = key;

@@ -5,17 +5,19 @@ import org.springframework.context.ApplicationEvent;
 
 import java.util.Locale;
 
+
 @SuppressWarnings("serial")
 public class DifferentLocationLoginHandler extends ApplicationEvent {
 
-    private final Locale local;
+    private final Locale locale;
     private final String username;
     private final String ip;
     private final NewLocationToken token;
     private final String appUrl;
 
-    public DifferentLocationLoginHandler(Locale local, String username, String ip, NewLocationToken token, String appUrl) {
-        this.local = local;
+    public DifferentLocationLoginHandler(Locale locale, String username, String ip, NewLocationToken token, String appUrl) {
+        super(token);
+        this.locale = locale;
         this.username = username;
         this.ip = ip;
         this.token = token;
@@ -23,8 +25,8 @@ public class DifferentLocationLoginHandler extends ApplicationEvent {
     }
 
 
-    public Locale getLocal() {
-        return local;
+    public Locale getLocale() {
+        return locale;
     }
 
     public String getUsername() {
