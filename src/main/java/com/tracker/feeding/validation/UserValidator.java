@@ -9,7 +9,7 @@ import org.springframework.validation.Validator;
 public class UserValidator implements Validator {
 
     @Override
-    public boolean support(final Class<?> supportClass) {
+    public boolean supports(final Class<?> supportClass) {
         return UserDto.class.isAssignableFrom(supportClass);
     }
 

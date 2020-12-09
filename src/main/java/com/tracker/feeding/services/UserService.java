@@ -195,7 +195,6 @@ public class UserService implements IUserService {
         }
 
         user.setEnabled(true);
-        // tokenDao.delete(verificationToken);
         userDao.save(user);
         return TOKEN_VALID;
     }
