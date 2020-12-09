@@ -9,6 +9,7 @@ import com.tracker.feeding.models.PasswordResetToken;
 import com.tracker.feeding.models.NewLocationToken;
 import com.tracker.feeding.models.User;
 import com.tracker.feeding.models.VerificationToken;
+import com.tracker.feeding.util.errors.UserAlreadyExistsException;
 
 
 public interface IUserService {
