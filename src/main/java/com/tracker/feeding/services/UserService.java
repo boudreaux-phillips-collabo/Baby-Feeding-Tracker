@@ -1,9 +1,7 @@
 package com.tracker.feeding.services;
 
-import com.tracker.feeding.models.NewLocationToken;
-import com.tracker.feeding.models.PasswordResetToken;
-import com.tracker.feeding.models.User;
-import com.tracker.feeding.models.VerificationToken;
+import com.tracker.feeding.dto.UserDto;
+import com.tracker.feeding.models.*;
 import com.tracker.feeding.repositories.*;
 
 
