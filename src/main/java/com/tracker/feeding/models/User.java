@@ -58,19 +58,6 @@ public class User {
         this.enabled = false;
     }
 
-//    public User(long id, String username, String email, String firstName, String lastName, String password, Date signupDate, String url, boolean enabled, boolean tokenExpired) {
-//        this.id = id;
-//        this.username = username;
-//        this.email = email;
-//        this.firstName = firstName;
-//        this.lastName = lastName;
-//        this.password = password;
-//        this.signupDate = signupDate;
-//        this.url = url;
-//        this.enabled = enabled;
-//    }
-
-
     public Long getId() {
         return id;
     }
@@ -99,7 +86,7 @@ public class User {
         return firstName;
     }
 
-    public void setFirst_name(final String firstName) {
+    public void setFirstName(final String firstName) {
         this.firstName = firstName;
     }
 
@@ -107,7 +94,7 @@ public class User {
         return lastName;
     }
 
-    public void setLast_name(final String lastName) {
+    public void setLastName(final String lastName) {
         this.lastName = lastName;
     }
 
@@ -151,11 +138,11 @@ public class User {
         this.enabled = enabled;
     }
 
-    public boolean getUsing2FA() {
+    public boolean isUsing2FA() {
         return isUsing2FA;
     }
 
-    public void isUsing2FA(boolean isUsing2FA) {
+    public void setUsing2FA(boolean isUsing2FA) {
         this.isUsing2FA = isUsing2FA;
     }
 
