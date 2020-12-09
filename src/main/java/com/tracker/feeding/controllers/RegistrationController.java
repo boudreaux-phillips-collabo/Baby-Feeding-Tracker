@@ -3,7 +3,7 @@ package com.tracker.feeding.controllers;
 import com.tracker.feeding.models.Privilege;
 import com.tracker.feeding.models.Role;
 import com.tracker.feeding.models.User;
-import com.tracker.feeding.registration.OnRegistrationCompleteEvent;
+import com.tracker.feeding.services.RegistrationEventHandler;
 import com.tracker.feeding.security.ISecurityUserService;
 import com.tracker.feeding.services.IUserService;
 import com.tracker.feeding.dto.UserDto;
@@ -62,10 +62,10 @@ public class RegistrationController {
         final String result = userService.validateVerificationToken(token);
         if (result.equals("valid")) {
             final User user = userService.getUser(token);
-            // if (user.isUsing2FA()) {
-            // model.addAttribute("qr", userService.generateQRUrl(user));
-            // return "redirect:/qrcode.html?lang=" + locale.getLanguage();
-            // }
+             if (user.isUsing2FA()) {
+             model.addAttribute("qr", userService.generateQRUrl(user));
+             return "redirect:/qrcode.html?lang=" + locale.getLanguage();
+             }
             authWithoutPassword(user);
             model.addAttribute("messageKey", "message.accountVerified");
             return new ModelAndView("redirect:/console", model);
@@ -148,16 +148,16 @@ public class RegistrationController {
         return new ModelAndView("login", model);
     }
 
-//    @RequestMapping(value = "/user/enableNewLoc", method = RequestMethod.GET)
-//    public String enableNewLoc(Locale locale, Model model, @RequestParam("token") String token) {
-//        final String loc = userService.isValidNewLocationToken(token);
-//        if (loc != null) {
-//            model.addAttribute("message", messages.getMessage("message.newLoc.enabled", new Object[] { loc }, locale));
-//        } else {
-//            model.addAttribute("message", messages.getMessage("message.error", null, locale));
-//        }
-//        return "redirect:/login?lang=" + locale.getLanguage();
-//    }
+    @RequestMapping(value = "/user/enableNewLoc", method = RequestMethod.GET)
+    public String enableNewLoc(Locale locale, Model model, @RequestParam("token") String token) {
+        final String loc = userService.isValidNewLocationToken(token);
+        if (loc != null) {
+            model.addAttribute("message", messages.getMessage("message.newLoc.enabled", new Object[] { loc }, locale));
+        } else {
+            model.addAttribute("message", messages.getMessage("message.error", null, locale));
+        }
+        return "redirect:/login?lang=" + locale.getLanguage();
+    }
 
     // ============== NON-API ============
 
@@ -182,11 +182,11 @@ public class RegistrationController {
         return "http://" + request.getServerName() + ":" + request.getServerPort() + request.getContextPath();
     }
 
-//    private final String getClientIP(HttpServletRequest request) {
-//        final String xfHeader = request.getHeader("X-Forwarded-For");
-//        if (xfHeader == null) {
-//            return request.getRemoteAddr();
-//        }
-//        return xfHeader.split(",")[0];
-//    }
+    private final String getClientIP(HttpServletRequest request) {
+        final String xfHeader = request.getHeader("X-Forwarded-For");
+        if (xfHeader == null) {
+            return request.getRemoteAddr();
+        }
+        return xfHeader.split(",")[0];
+    }
 }

@@ -2,12 +2,12 @@ package com.tracker.feeding.controllers;
 
 import com.tracker.feeding.models.User;
 import com.tracker.feeding.models.VerificationToken;
-import com.tracker.feeding.OnRegistrationCompleteEvent;
+import com.tracker.feeding.services.RegistrationEventHandler;
 import com.tracker.feeding.security.ISecurityUserService;
 import com.tracker.feeding.services.IUserService;
 import com.tracker.feeding.dto.PasswordDto;
 import com.tracker.feeding.dto.UserDto;
-import com.tracker.feeding.error.InvalidOldPasswordException;
+import com.tracker.feeding.util.errors.InvalidOldPasswordException;
 import com.tracker.feeding.util.GenericResponse;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -60,7 +60,7 @@ public class RegistrationRestController {
 
         final User registered = userService.registerNewUserAccount(accountDto);
         userService.addUserLocation(registered, getClientIP(request));
-        eventPublisher.publishEvent(new OnRegistrationCompleteEvent(registered, request.getLocale(), getAppUrl(request)));
+        eventPublisher.publishEvent(new RegistrationEventHandler(registered, request.getLocale(), getAppUrl(request)));
         return new GenericResponse("success");
     }
 
