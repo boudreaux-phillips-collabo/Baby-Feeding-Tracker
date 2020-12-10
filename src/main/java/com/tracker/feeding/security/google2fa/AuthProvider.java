@@ -40,6 +40,7 @@ public class AuthProvider extends DaoAuthenticationProvider {
         } catch (final NumberFormatException e) {
             return false;
         }
+        return true;
     }
 
     @Override

@@ -47,7 +47,7 @@ public class RegistrationListener implements ApplicationListener<RegistrationEve
         email.setTo(recipientAddress);
         email.setSubject(subject);
         email.setText(message + " \r\n" + confirmationUrl);
-        email.setFrom(env.getProperty("support.email"));
+        //email.setFrom(env.getProperty("support.email"));
         return email;
     }
 }

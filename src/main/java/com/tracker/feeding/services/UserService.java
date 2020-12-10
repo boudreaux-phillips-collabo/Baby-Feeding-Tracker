@@ -125,7 +125,7 @@ public class UserService implements IUserService {
     }
 
     @Override
-    public void createVerificationTokenForUser(final User user, final String token) {
+    public void createUserVerificationToken(final User user, final String token) {
         final VerificationToken myToken = new VerificationToken(token, user);
         tokenDao.save(myToken);
     }
