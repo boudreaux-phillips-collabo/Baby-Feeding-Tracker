@@ -2,10 +2,13 @@ package com.tracker.feeding.models;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
-import javax.management.relation.Role;
-import javax.persistence.*;
 import java.util.Collection;
 import java.util.Date;
+
+import javax.persistence.*;
+
+import org.jboss.aerogear.security.otp.api.Base32;
+
 
 @Entity
 @Table(name = "users")
@@ -52,7 +55,7 @@ public class User {
 
     public User() {
         super();
-        this.isUsing2FA = isUsing2FA;
+        this.secret = Base32.random();
         this.enabled = false;
     }
 
@@ -193,6 +196,4 @@ public class User {
                 .append("]");
         return builder.toString();
     }
-
-
 }

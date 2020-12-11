@@ -24,7 +24,7 @@ import org.springframework.web.servlet.i18n.CookieLocaleResolver;
 import org.springframework.web.servlet.i18n.LocaleChangeInterceptor;
 
 @Configuration
-@ComponentScan(basePackages = { "com.tracker.feeding" } )
+@ComponentScan(basePackages = { "com.tracker.feeding.controllers", "com.tracker.feeding.dto", "com.tracker.feeding.util" } )
 @EnableWebMvc
 public class MvcConfig implements WebMvcConfigurer {
 
@@ -95,6 +95,7 @@ public class MvcConfig implements WebMvcConfigurer {
     public PasswordMatchesValidator passwordMatchesValidator() {
         return new PasswordMatchesValidator();
     }
+
 
     @Bean
     @ConditionalOnMissingBean(RequestContextListener.class)

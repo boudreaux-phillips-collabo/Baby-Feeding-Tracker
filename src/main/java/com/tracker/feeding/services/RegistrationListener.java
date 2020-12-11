@@ -2,7 +2,7 @@ package com.tracker.feeding.services;
 
 import com.tracker.feeding.models.User;
 import com.tracker.feeding.services.IUserService;
-import org.hibernate.cfg.Environment;
+import org.springframework.core.env.Environment;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationListener;
 import org.springframework.context.MessageSource;

@@ -36,7 +36,7 @@ import com.maxmind.geoip2.exception.GeoIp2Exception;
 
 @Configuration
 @Order(2)
-@ComponentScan(basePackages = { "com.tracker.feeding" })
+@ComponentScan(basePackages = { "com.tracker.feeding.security" })
 @EnableWebSecurity
 public class SecSecurityConfig extends WebSecurityConfigurerAdapter {
 

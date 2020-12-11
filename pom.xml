@@ -145,6 +145,14 @@
             <version>2.0.2</version>
         </dependency>
 
+        <!-- https://mvnrepository.com/artifact/org.codehaus.groovy/groovy-all -->
+        <dependency>
+            <groupId>org.codehaus.groovy</groupId>
+            <artifactId>groovy-all</artifactId>
+            <version>3.0.2</version>
+            <type>pom</type>
+        </dependency>
+
     </dependencies>
 
     <build>
@@ -183,6 +191,12 @@
                         <!-- <provPersistenceTarget>h2</provPersistenceTarget> -->
                     </systemPropertyVariables>
                 </configuration>
+            </plugin>
+
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-war-plugin</artifactId>
+                <version>3.2.3</version>
             </plugin>
         </plugins>
     </build>

@@ -1,12 +1,12 @@
 package com.tracker.feeding.services;
 
+import com.tracker.feeding.models.DeviceMetadata;
+import com.tracker.feeding.models.User;
+import com.tracker.feeding.repositories.DeviceMetadataRepository;
 import com.google.common.base.Strings;
 import com.maxmind.geoip2.DatabaseReader;
 import com.maxmind.geoip2.exception.GeoIp2Exception;
 import com.maxmind.geoip2.model.CityResponse;
-import com.tracker.feeding.models.DeviceMetadata;
-import com.tracker.feeding.models.User;
-import com.tracker.feeding.repositories.DeviceMetadataRepository;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.MessageSource;
