@@ -10,7 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.util.StringUtils;
 import org.springframework.web.client.RestOperations;
 
-import com.tracker.feeding.util.errors.ReCaptchaInvalidException;
+import com.tracker.feeding.web.errors.ReCaptchaInvalidException;
 
 public abstract class AbstractCaptchaService implements ICaptchaService{
 

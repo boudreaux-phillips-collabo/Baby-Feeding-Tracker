@@ -6,5 +6,5 @@ import org.springframework.scheduling.annotation.EnableScheduling;
 
 @Configuration
 @EnableScheduling
-@ComponentScan({ "com.tracker.feeding.services" })
+@ComponentScan({ "com.tracker.feeding.services.task" })
 public class SpringTaskConfig {}

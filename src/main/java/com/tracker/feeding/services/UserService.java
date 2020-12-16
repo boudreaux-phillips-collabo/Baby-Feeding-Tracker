@@ -1,9 +1,9 @@
 package com.tracker.feeding.services;
 
-import com.tracker.feeding.dto.UserDto;
+import com.tracker.feeding.web.dto.UserDto;
 import com.tracker.feeding.models.*;
 import com.tracker.feeding.repositories.*;
-import com.tracker.feeding.util.errors.UserAlreadyExistsException;
+import com.tracker.feeding.web.errors.UserAlreadyExistsException;
 
 import javax.transaction.Transactional;
 import java.io.UnsupportedEncodingException;

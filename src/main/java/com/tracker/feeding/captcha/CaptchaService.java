@@ -7,8 +7,8 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestClientException;
 
-import com.tracker.feeding.util.errors.ReCaptchaInvalidException;
-import com.tracker.feeding.util.errors.ReCaptchaUnavailableException;
+import com.tracker.feeding.web.errors.ReCaptchaInvalidException;
+import com.tracker.feeding.web.errors.ReCaptchaUnavailableException;
 
 @Service("captchaService")
 public class CaptchaService extends AbstractCaptchaService {

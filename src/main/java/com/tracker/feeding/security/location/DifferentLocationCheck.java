@@ -2,7 +2,7 @@ package com.tracker.feeding.security.location;
 
 import com.tracker.feeding.services.IUserService;
 import com.tracker.feeding.models.NewLocationToken;
-import com.tracker.feeding.util.errors.UnusualLocationException;
+import com.tracker.feeding.web.errors.UnusualLocationException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.security.core.userdetails.UserDetails;

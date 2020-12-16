@@ -4,12 +4,12 @@ import java.io.UnsupportedEncodingException;
 import java.util.List;
 import java.util.Optional;
 
-import com.tracker.feeding.dto.UserDto;
+import com.tracker.feeding.web.dto.UserDto;
 import com.tracker.feeding.models.PasswordResetToken;
 import com.tracker.feeding.models.NewLocationToken;
 import com.tracker.feeding.models.User;
 import com.tracker.feeding.models.VerificationToken;
-import com.tracker.feeding.util.errors.UserAlreadyExistsException;
+import com.tracker.feeding.web.errors.UserAlreadyExistsException;
 
 
 public interface IUserService {

@@ -24,7 +24,7 @@ import org.springframework.web.servlet.i18n.CookieLocaleResolver;
 import org.springframework.web.servlet.i18n.LocaleChangeInterceptor;
 
 @Configuration
-@ComponentScan(basePackages = { "com.tracker.feeding.controllers", "com.tracker.feeding.dto", "com.tracker.feeding.util" } )
+@ComponentScan(basePackages = { "com.tracker.feeding.web" } )
 @EnableWebMvc
 public class MvcConfig implements WebMvcConfigurer {
 
@@ -37,28 +37,28 @@ public class MvcConfig implements WebMvcConfigurer {
 
 
     //CHANGE THIS
-    @Override
-    public void addViewControllers(final ViewControllerRegistry registry) {
-        registry.addViewController("/").setViewName("forward:/login");
-        registry.addViewController("/loginRememberMe");
-        registry.addViewController("/customLogin");
-        registry.addViewController("/registration.html");
-        registry.addViewController("/registrationCaptcha.html");
-        registry.addViewController("/registrationReCaptchaV3.html");
-        registry.addViewController("/logout.html");
-        registry.addViewController("/homepage.html");
-        registry.addViewController("/expiredAccount.html");
-        registry.addViewController("/emailError.html");
-        registry.addViewController("/home.html");
-        registry.addViewController("/invalidSession.html");
-        registry.addViewController("/admin.html");
-        registry.addViewController("/successRegister.html");
-        registry.addViewController("/forgetPassword.html");
-        registry.addViewController("/updatePassword.html");
-        registry.addViewController("/changePassword.html");
-        registry.addViewController("/users.html");
-        registry.addViewController("/qrcode.html");
-    }
+//    @Override
+//    public void addViewControllers(final ViewControllerRegistry registry) {
+//        registry.addViewController("/").setViewName("forward:/login");
+//        registry.addViewController("/loginRememberMe");
+//        registry.addViewController("/customLogin");
+//        registry.addViewController("/registration.html");
+//        registry.addViewController("/registrationCaptcha.html");
+//        registry.addViewController("/registrationReCaptchaV3.html");
+//        registry.addViewController("/logout.html");
+//        registry.addViewController("/homepage.html");
+//        registry.addViewController("/expiredAccount.html");
+//        registry.addViewController("/emailError.html");
+//        registry.addViewController("/home.html");
+//        registry.addViewController("/invalidSession.html");
+//        registry.addViewController("/admin.html");
+//        registry.addViewController("/successRegister.html");
+//        registry.addViewController("/forgetPassword.html");
+//        registry.addViewController("/updatePassword.html");
+//        registry.addViewController("/changePassword.html");
+//        registry.addViewController("/users.html");
+//        registry.addViewController("/qrcode.html");
+//    }
 
     @Override
     public void configureDefaultServletHandling(final DefaultServletHandlerConfigurer configurer) {

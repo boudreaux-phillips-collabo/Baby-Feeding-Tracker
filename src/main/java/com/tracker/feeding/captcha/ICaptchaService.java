@@ -1,6 +1,6 @@
 package com.tracker.feeding.captcha;
 
-import com.tracker.feeding.util.errors.ReCaptchaInvalidException;
+import com.tracker.feeding.web.errors.ReCaptchaInvalidException;
 
 public interface ICaptchaService {
 

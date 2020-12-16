@@ -3,7 +3,7 @@ package com.tracker.feeding.validation;
 import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;
 
-import com.tracker.feeding.dto.UserDto;
+import com.tracker.feeding.web.dto.UserDto;
 
 public class PasswordMatchesValidator implements ConstraintValidator<PasswordMatches, Object> {
 

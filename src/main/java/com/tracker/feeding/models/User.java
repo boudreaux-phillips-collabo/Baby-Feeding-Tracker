@@ -11,7 +11,7 @@ import org.jboss.aerogear.security.otp.api.Base32;
 
 
 @Entity
-@Table(name = "users")
+@Table(name = "user_account")
 public class User {
 
     @Id
@@ -19,27 +19,22 @@ public class User {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    @Column(nullable = false, length = 25)
     private String username;
 
-    @Column(nullable = false, length = 50, unique = true)
     private String email;
 
-    @Column(nullable = false, length = 50)
     private String firstName;
 
-    @Column(nullable = false, length = 50)
     private String lastName;
 
     @DateTimeFormat
     @Temporal(TemporalType.DATE)
-    @Column(nullable = false)
+    @Column
     private Date signupDate;
 
-    @Column(nullable = false, length = 75)
     private String url;
 
-    @Column(nullable = false, length = 50)
+    @Column(length = 60)
     private String password;
 
     private boolean enabled;

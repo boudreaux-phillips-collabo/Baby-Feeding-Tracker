@@ -1,6 +1,6 @@
 package com.tracker.feeding.validation;
 
-import com.tracker.feeding.dto.UserDto;
+import com.tracker.feeding.web.dto.UserDto;
 
 import org.springframework.validation.Errors;
 import org.springframework.validation.ValidationUtils;

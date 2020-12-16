@@ -35,7 +35,6 @@ import com.maxmind.geoip2.DatabaseReader;
 import com.maxmind.geoip2.exception.GeoIp2Exception;
 
 @Configuration
-@Order(2)
 @ComponentScan(basePackages = { "com.tracker.feeding.security" })
 @EnableWebSecurity
 public class SecSecurityConfig extends WebSecurityConfigurerAdapter {
@@ -56,7 +55,7 @@ public class SecSecurityConfig extends WebSecurityConfigurerAdapter {
     private AuthDetailsSource authenticationDetailsSource;
 
     @Autowired
-    private UserRepository userDao;
+    private UserRepository userRepository;
 
     @Autowired
     private DifferentLocationCheck differentLocationCheck;
