@@ -2,15 +2,16 @@ package com.tracker.feeding.models;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
-import javax.management.relation.Role;
-import javax.persistence.*;
 import java.util.Collection;
 import java.util.Date;
-import java.util.HashSet;
-import java.util.Set;
+
+import javax.persistence.*;
+
+import org.jboss.aerogear.security.otp.api.Base32;
+
 
 @Entity
-@Table(name = "users")
+@Table(name = "user_account")
 public class User {
 
     @Id
@@ -18,30 +19,27 @@ public class User {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    @Column(nullable = false, length = 25)
     private String username;
 
-    @Column(nullable = false, length = 50, unique = true)
     private String email;
 
-    @Column(nullable = false, length = 50)
     private String firstName;
 
-    @Column(nullable = false, length = 50)
     private String lastName;
 
     @DateTimeFormat
     @Temporal(TemporalType.DATE)
-    @Column(nullable = false)
+    @Column
     private Date signupDate;
 
-    @Column(nullable = false, length = 75)
     private String url;
 
-    @Column(nullable = false, length = 50)
+    @Column(length = 60)
     private String password;
 
     private boolean enabled;
+
+    private boolean isUsing2FA;
 
     private String secret;
 
@@ -52,21 +50,9 @@ public class User {
 
     public User() {
         super();
+        this.secret = Base32.random();
         this.enabled = false;
     }
-
-//    public User(long id, String username, String email, String firstName, String lastName, String password, Date signupDate, String url, boolean enabled, boolean tokenExpired) {
-//        this.id = id;
-//        this.username = username;
-//        this.email = email;
-//        this.firstName = firstName;
-//        this.lastName = lastName;
-//        this.password = password;
-//        this.signupDate = signupDate;
-//        this.url = url;
-//        this.enabled = enabled;
-//    }
-
 
     public Long getId() {
         return id;
@@ -96,7 +82,7 @@ public class User {
         return firstName;
     }
 
-    public void setFirst_name(final String firstName) {
+    public void setFirstName(final String firstName) {
         this.firstName = firstName;
     }
 
@@ -104,7 +90,7 @@ public class User {
         return lastName;
     }
 
-    public void setLast_name(final String lastName) {
+    public void setLastName(final String lastName) {
         this.lastName = lastName;
     }
 
@@ -136,7 +122,7 @@ public class User {
         return roles;
     }
 
-    public void setRoles(Collection<Role> roles) {
+    public void setRoles(final Collection<Role> roles) {
         this.roles = roles;
     }
 
@@ -146,6 +132,14 @@ public class User {
 
     public void setEnabled(final boolean enabled) {
         this.enabled = enabled;
+    }
+
+    public boolean isUsing2FA() {
+        return isUsing2FA;
+    }
+
+    public void setUsing2FA(boolean isUsing2FA) {
+        this.isUsing2FA = isUsing2FA;
     }
 
     public String getSecret() {
@@ -191,12 +185,10 @@ public class User {
                 .append(", lastName=").append(lastName)
                 .append(", email=").append(email)
                 .append(", enabled=").append(enabled)
-                //.append(", isUsing2FA=").append(isUsing2FA)
+                .append(", isUsing2FA=").append(isUsing2FA)
                 .append(", secret=").append(secret)
                 .append(", roles=").append(roles)
                 .append("]");
         return builder.toString();
     }
-
-
 }

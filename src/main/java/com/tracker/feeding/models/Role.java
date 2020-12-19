@@ -1,45 +1,46 @@
 package com.tracker.feeding.models;
 
-import javax.persistence.*;
 import java.util.Collection;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 
 @Entity
-@Table(name = "roles")
 public class Role {
+
     @Id
-    @GeneratedValue (strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
-    private String name;
 
     @ManyToMany(mappedBy = "roles")
     private Collection<User> users;
 
     @ManyToMany
-    @JoinTable(
-            name = "roles_privileges",
-            joinColumns = @JoinColumn(
-                    name = "role_id", referencedColumnName = "id"),
-            inverseJoinColumns = @JoinColumn(
-                    name = "privilege_id", referencedColumnName = "id")
-    )
+    @JoinTable(name = "roles_privileges", joinColumns = @JoinColumn(name = "role_id", referencedColumnName = "id"), inverseJoinColumns = @JoinColumn(name = "privilege_id", referencedColumnName = "id"))
     private Collection<Privilege> privileges;
 
+    private String name;
 
-    public Role(Long id, String name, Collection<User> users, Collection<Privilege> privileges) {
-        this.id = id;
-        this.name = name;
-        this.users = users;
-        this.privileges = privileges;
+    public Role() {
+        super();
     }
 
-    public Role () {}
+    public Role(final String name) {
+        super();
+        this.name = name;
+    }
 
+    //
 
     public Long getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(final Long id) {
         this.id = id;
     }
 
@@ -47,7 +48,7 @@ public class Role {
         return name;
     }
 
-    public void setName(String name) {
+    public void setName(final String name) {
         this.name = name;
     }
 
@@ -55,7 +56,7 @@ public class Role {
         return users;
     }
 
-    public void setUsers(Collection<User> users) {
+    public void setUsers(final Collection<User> users) {
         this.users = users;
     }
 
@@ -63,7 +64,40 @@ public class Role {
         return privileges;
     }
 
-    public void setPrivileges(Collection<Privilege> privileges) {
+    public void setPrivileges(final Collection<Privilege> privileges) {
         this.privileges = privileges;
+    }
+
+    @Override
+    public int hashCode() {
+        final int prime = 31;
+        int result = 1;
+        result = prime * result + ((getName() == null) ? 0 : getName().hashCode());
+        return result;
+    }
+
+    @Override
+    public boolean equals(final Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final Role role = (Role) obj;
+        if (!getName().equals(role.getName())) {
+            return false;
+        }
+        return true;
+    }
+
+    @Override
+    public String toString() {
+        final StringBuilder builder = new StringBuilder();
+        builder.append("Role [name=").append(name).append("]").append("[id=").append(id).append("]");
+        return builder.toString();
     }
 }
